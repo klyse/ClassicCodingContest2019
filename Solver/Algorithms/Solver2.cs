@@ -27,9 +27,11 @@ namespace Solver.Algorithms
 	{
 		public Position Solve(RoverInput2 input)
 		{
-			var alpha = Math.Round(input.Distance / input.TurnRadius, 2);
+			var alpha = input.Distance / input.TurnRadius, 2;
+			var beta = (180 - alpha) / 2;
 
-			var x = Math.Round(input.TurnRadius / Math.Cos(alpha), 2);
+
+			var x = Math.Round(input.TurnRadius * Math.Cos(alpha), 2);
 			var y = Math.Round(input.TurnRadius * Math.Sin(alpha), 2);
 
 			return new Position(x, y, 0);
