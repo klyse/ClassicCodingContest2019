@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Solver.Algorithms;
 using Solver.Model;
 
@@ -15,7 +14,7 @@ namespace Solver
 
 			Console.WriteLine();
 			Console.WriteLine("--------------------------");
-			Console.WriteLine(new Solver1().Solve(new RoverInput1().Parse(new []{"1", "0", "30"})));
+			Console.WriteLine(new Solver1().Solve(new RoverInput1().Parse(new[] { "1", "0", "30" })));
 
 			//var slideShowOutput = new SlideShowSolver1().ExecuteAndSave(Path.Combine(EnvironmentConstants.InputPath, "a_example.txt"), EnvironmentConstants.OutputPath, true);
 

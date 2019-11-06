@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Solver.Base;
 
 namespace Solver.Model
@@ -11,8 +10,9 @@ namespace Solver.Model
 
 		public RoverInput1 Parse(string[] values)
 		{
-			WheelBase = double.Parse(values.First());
-			SteeringAngle = double.Parse(values.Skip(1).First());
+			var val = values.First().Split(' ');
+			WheelBase = double.Parse(val.First());
+			SteeringAngle = double.Parse(val.Skip(1).First());
 
 			return this;
 		}

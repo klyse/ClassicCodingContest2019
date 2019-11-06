@@ -1,4 +1,5 @@
 ﻿using System;
+using Solver.Base;
 using Solver.Model;
 
 namespace Solver.Algorithms

@@ -14,9 +14,10 @@ namespace Solver.Model
 
 		public RoverInput2 Parse(string[] values)
 		{
-			WheelBase = double.Parse(values.First());
-			Distance = double.Parse(values.Skip(1).First());
-			SteeringAngle = double.Parse(values.Skip(2).First());
+			var val = values.First().Split(' ');
+			WheelBase = double.Parse(val.First());
+			Distance = double.Parse(val.Skip(1).First());
+			SteeringAngle = double.Parse(val.Skip(2).First());
 
 			return this;
 		}

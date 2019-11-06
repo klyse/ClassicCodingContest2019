@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using Solver.Base;
 using Solver.Model;
 
 namespace Solver.Algorithms
@@ -27,8 +27,7 @@ namespace Solver.Algorithms
 	{
 		public Position Solve(RoverInput2 input)
 		{
-			var alpha = input.Distance / input.TurnRadius, 2;
-			var beta = (180 - alpha) / 2;
+			var alpha = input.Distance / input.TurnRadius;
 
 
 			var x = Math.Round(input.TurnRadius * Math.Cos(alpha), 2);

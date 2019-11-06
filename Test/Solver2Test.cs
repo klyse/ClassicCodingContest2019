@@ -11,7 +11,7 @@ namespace Test
 		public string T1(string inputStr)
 		{
 			var solver = new Solver2();
-			var input = new RoverInput2().Parse(inputStr.Split(' '));
+			var input = new RoverInput2().Parse(new[] { inputStr });
 			var solution = solver.Solve(input);
 
 			return solution.ToString();
