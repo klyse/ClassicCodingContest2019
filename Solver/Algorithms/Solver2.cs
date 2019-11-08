@@ -14,11 +14,27 @@ namespace Solver.Algorithms
 
 			input.Data.ExecuteOnAll((value, row, col) =>
 									{
-										if (row > 1)
+										TerrainInput2.Value[] adjVal = new TerrainInput2.Value[4];
+
+										if (row > 0)
+											adjVal[0] = input.Data.GetAbove(row, col);
+
+										if (row < input.Data.Rows)
+											adjVal[1] = input.Data.GetBelow(row, col);
+
+										if (col > 0)
+											adjVal[2] = input.Data.GetLeft(row, col);
+
+										if (col < input.Data.Columns)
+											adjVal[3] = input.Data.GetRight(row, col);
+
+										foreach (var v in adjVal)
 										{
-											var above = input.Data.GetAbove(row, col);
-											if (above.Country != value.Country)
+											if (v is {} && v.Country != value.Country)
+											{
 												o.NrOfNeighbors[value.Country]++;
+												break;
+											}
 										}
 									});
 
