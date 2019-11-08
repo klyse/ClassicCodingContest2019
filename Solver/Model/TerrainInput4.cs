@@ -39,41 +39,7 @@ namespace Solver.Model
 			return this;
 		}
 
-		public bool IsBorder(int row, int col)
-		{
-			if (row == 0 || col == 0 || row == Matrix.Rows - 1 || col == Matrix.Columns - 1)
-				return true;
-			var country = Matrix[row, col].Country;
-
-			return
-				Matrix.GetAbove(row, col).Country != country ||
-				Matrix.GetBelow(row, col).Country != country ||
-				Matrix.GetLeft(row, col).Country != country ||
-				Matrix.GetRight(row, col).Country != country;
-		}
-
-		public bool IsBorder(Point coordinate)
-		{
-			return IsBorder(coordinate.Y, coordinate.X);
-		}
-
-		public double Distance(Point coordinate1, Point coordinate2)
-		{
-			var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
-			var xDist = Math.Abs(coordinate1.X - coordinate2.X);
-
-
-			return Math.Sqrt(Math.Pow(yDist, 2) + Math.Pow(xDist, 2));
-		}
-
-        public bool IsOutside(Point coordinate, int country)
-        {
-            if (coordinate.Y < 0 || coordinate.X < 0 || coordinate.Y >= Matrix.Rows || coordinate.X >= Matrix.Columns)
-                return true;
-            return Matrix[coordinate.Y, coordinate.X].Country != country;
-        }
-
-        public class Cell
+		public class Cell
 		{
 			public int Altitude { get; set; }
 			public int Country { get; set; }
