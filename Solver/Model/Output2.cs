@@ -10,7 +10,7 @@ namespace Solver.Model
 
 		public override string ToString()
 		{
-			return string.Join(Environment.NewLine, NrOfNeighbors.OrderBy(c => c.Key));
+			return string.Join(Environment.NewLine, NrOfNeighbors.OrderBy(c => c.Key).Select(q => q.Value));
 		}
 	}
 }
