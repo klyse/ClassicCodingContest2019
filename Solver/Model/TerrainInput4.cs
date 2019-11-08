@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using NeoMatrix;
+using Solver.Base;
+
+namespace Solver.Model
+{
+	public class TerrainInput4 : IInput<TerrainInput4>
+	{
+		public Matrix<Cell> Matrix;
+
+		public TerrainInput4 Parse(string[] values)
+		{
+			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
+
+			Matrix = new Matrix<Cell>(val[1], val[0]);
+
+			var row = 0;
+			foreach (var item in values.Skip(1))
+			{
+				var col = 0;
+				var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
+				for (var i = 0; i < rowData.Count; i = i + 2)
+				{
+					Matrix[row, col] = new Cell
+									   {
+										   Altitude = rowData[i], Country = rowData[i + 1],
+										   Col = col,
+										   Row = row
+									   };
+					col++;
+				}
+
+				row++;
+			}
+
+			return this;
+		}
+
+		public bool IsBorder(int row, int col)
+		{
+			if (row == 0 || col == 0 || row == Matrix.Rows - 1 || col == Matrix.Columns - 1)
+				return true;
+			var country = Matrix[row, col].Country;
+
+			return
+				Matrix.GetAbove(row, col).Country != country ||
+				Matrix.GetBelow(row, col).Country != country ||
+				Matrix.GetLeft(row, col).Country != country ||
+				Matrix.GetRight(row, col).Country != country;
+		}
+
+		public bool IsBorder(Point coordinate)
+		{
+			return IsBorder(coordinate.Y, coordinate.X);
+		}
+
+		public double Distance(Point coordinate1, Point coordinate2)
+		{
+			var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
+			var xDist = Math.Abs(coordinate1.X - coordinate2.X);
+
+
+			return Math.Sqrt(Math.Pow(yDist, 2) + Math.Pow(xDist, 2));
+		}
+
+        public bool IsOutside(Point coordinate, int country)
+        {
+            if (coordinate.Y < 0 || coordinate.X < 0 || coordinate.Y >= Matrix.Rows || coordinate.X >= Matrix.Columns)
+                return true;
+            return Matrix[coordinate.Y, coordinate.X].Country != country;
+        }
+
+        public class Cell
+		{
+			public int Altitude { get; set; }
+			public int Country { get; set; }
+
+			public int Row { get; set; }
+			public int Col { get; set; }
+
+			public Dictionary<int, int> Distances { get; set; } = new Dictionary<int, int>();
+		}
+	}
+}
