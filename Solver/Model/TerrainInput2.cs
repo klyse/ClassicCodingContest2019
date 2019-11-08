@@ -6,20 +6,20 @@ namespace Solver.Model
 {
 	public class TerrainInput2 : IInput<TerrainInput2>
 	{
-        public class Value
+        public class Cell
         {
             public int Altitude { get; set; }
             public int Country { get; set; }
         }
 
 
-        public Matrix<Value> Data;
+        public Matrix<Cell> Matrix;
 
 		public TerrainInput2 Parse(string[] values)
 		{
 			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
 
-			Data = new Matrix<Value>(val[1], val[0]);
+			Matrix = new Matrix<Cell>(val[1], val[0]);
 
             var row = 0;
             foreach (var item in values.Skip(1))
@@ -28,7 +28,7 @@ namespace Solver.Model
                 var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
                 for (int i = 0; i < rowData.Count; i = i + 2)
                 {
-                    Data[row, col] = new Value { Altitude = rowData[i], Country = rowData[i + 1] };
+                    Matrix[row, col] = new Cell { Altitude = rowData[i], Country = rowData[i + 1] };
                     col++;
                 }
 
