@@ -68,7 +68,9 @@ namespace Solver.Model
 
 		public bool IsOutside(Point coordinate, int country)
 		{
-			return Matrix[coordinate.Y, coordinate.X].Country != country;
+            if (coordinate.Y < 0 || coordinate.X < 0 || coordinate.Y >= Matrix.Rows || coordinate.X >= Matrix.Columns)
+                return true;
+            return Matrix[coordinate.Y, coordinate.X].Country != country;
 		}
 
 		public class Cell
