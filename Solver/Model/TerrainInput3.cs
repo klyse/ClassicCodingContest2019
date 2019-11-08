@@ -18,8 +18,20 @@ namespace Solver.Model
 			public Dictionary<int, int> Distances { get; set; } = new Dictionary<int, int>();
 		}
 
+        public bool IsBorder(int row, int col)
+        {
+            if (row == 0 || col == 0 || row == Matrix.Rows - 1 || col == Matrix.Columns - 1)
+                return true;
+            var country = Matrix[row, col].Country;
 
-		public Matrix<Cell> Matrix;
+            return
+                Matrix.GetAbove(row, col).Country != country ||
+                Matrix.GetBelow(row, col).Country != country ||
+                Matrix.GetLeft(row, col).Country != country ||
+                Matrix.GetRight(row, col).Country != country;
+        }
+
+        public Matrix<Cell> Matrix;
 
 		public TerrainInput3 Parse(string[] values)
 		{
