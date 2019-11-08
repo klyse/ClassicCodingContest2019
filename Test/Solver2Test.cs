@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Solver;
 using Solver.Algorithms;
 using Solver.Model;
 
@@ -7,14 +8,16 @@ namespace Test
 	public class Solver2Test
 	{
 		[Test]
-		[TestCase("1,00 1,00 30,00", ExpectedResult = "12")]
-		public string T1(string inputStr)
+		[TestCase("New Text File.txt")]
+		public void T1(string file)
 		{
-			var solver = new Solver2();
-			var input = new RoverInput2().Parse(new[] { inputStr });
-			var solution = solver.Solve(input);
+			var fileInput = file.Read();
+			var input = new RoverInput1().Parse(fileInput);
 
-			return solution.ToString();
+			var solution = new Solver1().Solve(input);
+
+			file.Write(solution);
+			Assert.Pass();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Solver
 {
@@ -7,6 +8,17 @@ namespace Solver
 		public static double ToRad(this double deg)
 		{
 			return Math.PI * deg / 180;
+		}
+
+		public static string[] Read(this string fileName)
+		{
+			var readAllLines = File.ReadAllLines(Path.Combine(EnvironmentConstants.DataPath, EnvironmentConstants.InputPath, fileName));
+			return readAllLines;
+		}
+
+		public static void Write(this string fileName, string[] lines)
+		{
+			File.WriteAllLines(Path.Combine(EnvironmentConstants.DataPath, EnvironmentConstants.OutputPath, fileName), lines);
 		}
 	}
 }

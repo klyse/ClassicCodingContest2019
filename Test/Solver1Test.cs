@@ -1,9 +1,6 @@
-using System;
-using System.IO;
-using GoogleHashCode2019;
 using NUnit.Framework;
+using Solver;
 using Solver.Algorithms;
-using Solver.Base;
 using Solver.Model;
 
 namespace Test
@@ -11,11 +8,16 @@ namespace Test
 	public class Solver1Test
 	{
 		[Test]
-		public void T1()
+		[TestCase("New Text File.txt")]
+		public void T1(string file)
 		{
-			var x = EnvironmentConstants.DataPath;
-			var solution = new Solver1().Solve(new RoverInput1().Parse(new[] { "1 30" }));
-			Assert.AreEqual(2, solution);
+			var fileInput = file.Read();
+			var input = new RoverInput1().Parse(fileInput);
+
+			var solution = new Solver1().Solve(input);
+
+			file.Write(solution);
+			Assert.Pass();
 		}
 	}
 }
