@@ -26,11 +26,11 @@ namespace Solver.Algorithms
 
 				var location = new Point(coords.Select(q => q.X).Sum() / coords.Count, coords.Select(q => q.Y).Sum() / coords.Count);
 
-				if (input.IsBorder(location))
+				if (input.IsBorder(location) || input.IsOutside(location, country))
 				{
 					// Get all inside country cells
 					var temp = coords
-							   .Where(q => !input.IsBorder(q) || input.IsOutside(q, country))
+							   .Where(q => !input.IsBorder(q))
 							   .Select(q => new { Location = q, Distance = input.Distance(location, q) })
 							   .OrderBy(q => q.Distance).ThenBy(q => q.Location.Y).ThenBy(q => q.Location.X)
 							   .ToList();
