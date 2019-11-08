@@ -16,7 +16,7 @@ namespace Test
 
 			var solution = new Solver1().Solve(input);
 
-			file.Write(solution);
+			file.Write(solution.ToString());
 			Assert.Pass();
 		}
 	}
