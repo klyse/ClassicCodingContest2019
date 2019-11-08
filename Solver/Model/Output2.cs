@@ -1,14 +1,16 @@
-﻿namespace Solver.Model
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Solver.Model
 {
 	public class Output2
 	{
-		public int Min { get; set; }
-		public int Max { get; set; }
-		public int Avg { get; set; }
+		public Dictionary<int, int> NrOfNeighbors { get; set; } = new Dictionary<int, int>();
 
 		public override string ToString()
 		{
-			return $"{Min} {Max} {Avg}";
+			return string.Join(Environment.NewLine, NrOfNeighbors.OrderBy(c => c.Key));
 		}
 	}
 }
