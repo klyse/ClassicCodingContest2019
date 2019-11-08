@@ -23,7 +23,7 @@ namespace Solver.Model
                     Data[row, col] = cell;
                     col++;
                 }
-                
+                row++;
             }
 
             return this;
