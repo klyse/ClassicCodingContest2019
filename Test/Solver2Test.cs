@@ -4,7 +4,8 @@ using Solver;
 using Solver.Algorithms;
 using Solver.Model;
 
-namespace Test {
+namespace Test
+{
 	public class Solver2Test
 	{
 		[Test]

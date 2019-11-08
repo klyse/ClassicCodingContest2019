@@ -14,19 +14,20 @@ namespace Solver.Model
 
 			Data = new Matrix<int>(val[1], val[0]);
 
-            var row = 0;
-            foreach (var item in values.Skip(1))
-            {
-                var col = 0;
-                foreach (var cell in item.Split(' ').Select(q => int.Parse(q)))
-                {
-                    Data[row, col] = cell;
-                    col++;
-                }
-                row++;
-            }
+			var row = 0;
+			foreach (var item in values.Skip(1))
+			{
+				var col = 0;
+				foreach (var cell in item.Split(' ').Select(q => int.Parse(q)))
+				{
+					Data[row, col] = cell;
+					col++;
+				}
 
-            return this;
+				row++;
+			}
+
+			return this;
 		}
 	}
 }

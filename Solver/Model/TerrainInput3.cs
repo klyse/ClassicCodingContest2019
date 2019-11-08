@@ -9,15 +9,34 @@ namespace Solver.Model
 {
 	public class TerrainInput3 : IInput<TerrainInput3>
 	{
-		public class Cell
+		public Matrix<Cell> Matrix;
+
+		public TerrainInput3 Parse(string[] values)
 		{
-			public int Altitude { get; set; }
-			public int Country { get; set; }
+			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
 
-			public int Row { get; set; }
-			public int Col { get; set; }
+			Matrix = new Matrix<Cell>(val[1], val[0]);
 
-			public Dictionary<int, int> Distances { get; set; } = new Dictionary<int, int>();
+			var row = 0;
+			foreach (var item in values.Skip(1))
+			{
+				var col = 0;
+				var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
+				for (var i = 0; i < rowData.Count; i = i + 2)
+				{
+					Matrix[row, col] = new Cell
+									   {
+										   Altitude = rowData[i], Country = rowData[i + 1],
+										   Col = col,
+										   Row = row
+									   };
+					col++;
+				}
+
+				row++;
+			}
+
+			return this;
 		}
 
 		public bool IsBorder(int row, int col)
@@ -38,48 +57,29 @@ namespace Solver.Model
 			return IsBorder(coordinate.Y, coordinate.X);
 		}
 
-        public double Distance(Point coordinate1, Point coordinate2)
-        {
-            var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
-            var xDist = Math.Abs(coordinate1.X - coordinate2.X);
-	
+		public double Distance(Point coordinate1, Point coordinate2)
+		{
+			var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
+			var xDist = Math.Abs(coordinate1.X - coordinate2.X);
 
-            return Math.Sqrt(Math.Pow(yDist, 2) + Math.Pow(xDist, 2));
-        }
+
+			return Math.Sqrt(Math.Pow(yDist, 2) + Math.Pow(xDist, 2));
+		}
 
 		public bool IsOutside(Point coordinate, int country)
 		{
 			return Matrix[coordinate.Y, coordinate.X].Country != country;
 		}
 
-		public Matrix<Cell> Matrix;
-
-		public TerrainInput3 Parse(string[] values)
+		public class Cell
 		{
-			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
+			public int Altitude { get; set; }
+			public int Country { get; set; }
 
-			Matrix = new Matrix<Cell>(val[1], val[0]);
+			public int Row { get; set; }
+			public int Col { get; set; }
 
-			var row = 0;
-			foreach (var item in values.Skip(1))
-			{
-				var col = 0;
-				var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
-				for (int i = 0; i < rowData.Count; i = i + 2)
-				{
-					Matrix[row, col] = new Cell
-									   {
-										   Altitude = rowData[i], Country = rowData[i + 1],
-										   Col = col,
-										   Row = row
-									   };
-					col++;
-				}
-
-				row++;
-			}
-
-			return this;
+			public Dictionary<int, int> Distances { get; set; } = new Dictionary<int, int>();
 		}
 	}
 }

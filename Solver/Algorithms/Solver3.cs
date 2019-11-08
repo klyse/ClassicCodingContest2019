@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Solver.Base;
@@ -27,7 +26,7 @@ namespace Solver.Algorithms
 																		var yDist = Math.Abs(row - row1);
 																		var xDist = Math.Abs(col - col1);
 
-																		var dist = (int)Math.Sqrt(yDist ^ 2 + xDist ^ 2);
+																		var dist = (int)Math.Sqrt(yDist ^ (2 + xDist) ^ 2);
 
 																		value.Distances[cell.Country] += dist;
 																	});

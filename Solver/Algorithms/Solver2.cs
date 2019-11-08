@@ -36,13 +36,11 @@ namespace Solver.Algorithms
 										  }
 
 										  foreach (var v in adjVal)
-										  {
 											  if (v.Country != value.Country)
 											  {
 												  o.NrOfNeighbors[value.Country]++;
 												  break;
 											  }
-										  }
 									  });
 
 			return o;
