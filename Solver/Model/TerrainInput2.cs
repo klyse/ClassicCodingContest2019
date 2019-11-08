@@ -6,23 +6,32 @@ namespace Solver.Model
 {
 	public class TerrainInput2 : IInput<TerrainInput2>
 	{
-		public Matrix<int> Data;
+        public class Value
+        {
+            public int Altitude { get; set; }
+            public int Country { get; set; }
+        }
+
+
+        public Matrix<Value> Data;
 
 		public TerrainInput2 Parse(string[] values)
 		{
 			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
 
-			Data = new Matrix<int>(val[1], val[0]);
+			Data = new Matrix<Value>(val[1], val[0]);
 
             var row = 0;
             foreach (var item in values.Skip(1))
             {
                 var col = 0;
-                foreach (var cell in item.Split(' ').Select(q => int.Parse(q)))
+                var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
+                for (int i = 0; i < rowData.Count; i = i + 2)
                 {
-                    Data[row, col] = cell;
+                    Data[row, col] = new Value { Altitude = rowData[i], Country = rowData[i + 1] };
                     col++;
                 }
+
                 row++;
             }
 
