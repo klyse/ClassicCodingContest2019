@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Solver.Base;
 using Solver.Model;
@@ -11,39 +13,27 @@ namespace Solver.Algorithms
 		{
 			var o = new Output3();
 			var countries = input.Matrix.GetFlat().Select(c => c.Country).Distinct().ToList();
-			countries.ForEach(c => o.Capital.Add(c, new Output3.Location { X = 0, Y = 0 }));
+			countries.ForEach(c => o.Capital.Add(c, Point.Empty));
 
 			input.Matrix.ExecuteOnAll((value, row, col) =>
 									  {
-										  var adjVal = new List<TerrainInput3.Cell>();
+										  countries.ForEach(c => value.Distances.Add(c, 0));
 
-										  if (row > 0)
-											  adjVal.Add(input.Matrix.GetAbove(row, col));
+										  input.Matrix.ExecuteOnAll((cell, row1, col1) =>
+																	{
+																		if (row1 == row && col1 == col)
+																			return;
 
-										  if (row < input.Matrix.Rows - 1)
-											  adjVal.Add(input.Matrix.GetBelow(row, col));
+																		var yDist = Math.Abs(row - row1);
+																		var xDist = Math.Abs(col - col1);
 
-										  if (col > 0)
-											  adjVal.Add(input.Matrix.GetLeft(row, col));
+																		var dist = (int)Math.Sqrt(yDist ^ 2 + xDist ^ 2);
 
-										  if (col < input.Matrix.Columns - 1)
-											  adjVal.Add(input.Matrix.GetRight(row, col));
-
-										  if (adjVal.Count < 4)
-										  {
-											  // o.Capital[value.Country]++;
-											  return;
-										  }
-
-										  foreach (var v in adjVal)
-										  {
-											  if (v.Country != value.Country)
-											  {
-												  //  o.Capital[value.Country]++;
-												  break;
-											  }
-										  }
+																		value.Distances[cell.Country] += dist;
+																	});
 									  });
+
+			var center = input.Matrix.GetFlat().Where(c => c.Country == 0).OrderBy(c => c.Distances[0]).ToList();
 
 			return o;
 		}
