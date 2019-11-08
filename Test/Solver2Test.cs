@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Solver;
 using Solver.Algorithms;
@@ -21,6 +22,7 @@ namespace Test {
 			var solution = new Solver2().Solve(input);
 
 			file.Write(solution.ToString());
+			Console.WriteLine(solution);
 			Assert.Pass();
 		}
 	}
