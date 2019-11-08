@@ -1,6 +1,5 @@
 ﻿using System;
 using Solver.Algorithms;
-using Solver.Model;
 
 namespace Solver
 {

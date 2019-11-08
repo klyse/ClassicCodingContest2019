@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using Solver;
 using Solver.Algorithms;
-using Solver.Model;
 
 namespace Test
 {

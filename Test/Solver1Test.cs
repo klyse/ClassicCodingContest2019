@@ -2,7 +2,6 @@ using NUnit.Framework;
 using Solver;
 using Solver.Algorithms;
 using Solver.Model;
-using System.Collections.Generic;
 
 namespace Test
 {
@@ -18,7 +17,7 @@ namespace Test
 		public void T1(string file)
 		{
 			var fileInput = file.Read();
-			var input = new RoverInput1().Parse(fileInput);
+			var input = new TerrainInput1().Parse(fileInput);
 
 			var solution = new Solver1().Solve(input);
 

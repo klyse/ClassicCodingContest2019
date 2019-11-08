@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Solver
 {
@@ -21,9 +21,10 @@ namespace Solver
 		{
 			File.WriteAllLines(Path.Combine(EnvironmentConstants.DataPath, EnvironmentConstants.OutputPath, fileName), lines);
 		}
-        public static void Write(this string fileName, string line)
-        {
-            Write(fileName, new List<string> { line }.ToArray());
-        }
-    }
+
+		public static void Write(this string fileName, string line)
+		{
+			Write(fileName, new List<string> { line }.ToArray());
+		}
+	}
 }
