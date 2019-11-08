@@ -33,7 +33,12 @@ namespace Solver.Algorithms
 																	});
 									  });
 
-			var center = input.Matrix.GetFlat().Where(c => c.Country == 0).OrderBy(c => c.Distances[0]).ToList();
+			foreach (var country in countries)
+			{
+				var pList = input.Matrix.GetFlat().Where(c => c.Country == country).OrderBy(c => c.Distances[country]).ToList();
+				var p = pList.First();
+				o.Capital[country] = new Point(p.Col, p.Row);
+			}
 
 			return o;
 		}
