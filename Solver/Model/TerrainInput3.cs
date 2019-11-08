@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using NeoMatrix;
 using Solver.Base;
@@ -29,6 +31,19 @@ namespace Solver.Model
                 Matrix.GetBelow(row, col).Country != country ||
                 Matrix.GetLeft(row, col).Country != country ||
                 Matrix.GetRight(row, col).Country != country;
+        }
+
+        public bool IsBorder(Point coordinate)
+        {
+            return IsBorder(coordinate.Y, coordinate.X);
+        }
+
+        public int Distance(Point coordinate1, Point coordinate2)
+        {
+            var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
+            var xDist = Math.Abs(coordinate1.X - coordinate2.X);
+
+            return (int)Math.Sqrt(yDist ^ 2 + xDist ^ 2);
         }
 
         public Matrix<Cell> Matrix;
