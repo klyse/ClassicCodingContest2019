@@ -11,7 +11,7 @@ namespace Solver.Algorithms
 		{
 			var o = new Output3();
 			var countries = input.Matrix.GetFlat().Select(c => c.Country).Distinct().ToList();
-			countries.ForEach(c => o.NrOfNeighbors.Add(c, 0));
+			countries.ForEach(c => o.Capital.Add(c, new Output3.Location { X = 0, Y = 0 }));
 
 			input.Matrix.ExecuteOnAll((value, row, col) =>
 									  {
@@ -31,7 +31,7 @@ namespace Solver.Algorithms
 
 										  if (adjVal.Count < 4)
 										  {
-											  o.NrOfNeighbors[value.Country]++;
+											  // o.Capital[value.Country]++;
 											  return;
 										  }
 
@@ -39,7 +39,7 @@ namespace Solver.Algorithms
 										  {
 											  if (v.Country != value.Country)
 											  {
-												  o.NrOfNeighbors[value.Country]++;
+												  //  o.Capital[value.Country]++;
 												  break;
 											  }
 										  }
