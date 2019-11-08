@@ -9,7 +9,12 @@ namespace Test
 	public class Solver1Test
 	{
 		[Test]
-		[TestCase("New Text File.txt")]
+		[TestCase("Level1/level1_example.in")]
+		[TestCase("Level1/level1_1.in")]
+		[TestCase("Level1/level1_2.in")]
+		[TestCase("Level1/level1_3.in")]
+		[TestCase("Level1/level1_4.in")]
+		[TestCase("Level1/level1_5.in")]
 		public void T1(string file)
 		{
 			var fileInput = file.Read();
