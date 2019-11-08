@@ -7,8 +7,8 @@ using Solver.Base;
 
 namespace Solver.Model
 {
-	public class TerrainInput4 : IInput<TerrainInput4>
-	{
+    public class TerrainInput4 : IInput<TerrainInput4>
+    {
         public class Ray
         {
             public Point Start;
@@ -31,31 +31,15 @@ namespace Solver.Model
 
             Rays = new List<Ray>();
 
-            /*
-            var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
+            var n = int.Parse(values[1]);
 
-            Matrix = new Matrix<Cell>(val[1], val[0]);
-
-            var row = 0;
-            foreach (var item in values.Skip(1))
+            for (int i = 0; i < n; i++)
             {
-                var col = 0;
-                var rowData = item.Split(' ').Select(q => int.Parse(q)).ToList();
-                for (var i = 0; i < rowData.Count; i = i + 2)
-                {
-                    Matrix[row, col] = new Cell
-                    {
-                        Altitude = rowData[i], Country = rowData[i + 1],
-                        Col = col,
-                        Row = row
-                    };
-                    col++;
-                }
-
-                row++;
+                val = values[2 + i].Split(' ').Select(q => int.Parse(q)).ToList();
+                Rays.Add(new Ray { Start = new Point(val[0], val[1]), Direction = new Point(val[2], val[3]) });
             }
-        */
+
             return this;
-		}
-	}
+        }
+    }
 }
