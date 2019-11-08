@@ -1,0 +1,32 @@
+﻿using System.Linq;
+using NeoMatrix;
+using Solver.Base;
+
+namespace Solver.Model
+{
+	public class TerrainInput2 : IInput<TerrainInput2>
+	{
+		public Matrix<int> Data;
+
+		public TerrainInput2 Parse(string[] values)
+		{
+			var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
+
+			Data = new Matrix<int>(val[1], val[0]);
+
+            var row = 0;
+            foreach (var item in values.Skip(1))
+            {
+                var col = 0;
+                foreach (var cell in item.Split(' ').Select(q => int.Parse(q)))
+                {
+                    Data[row, col] = cell;
+                    col++;
+                }
+                row++;
+            }
+
+            return this;
+		}
+	}
+}
