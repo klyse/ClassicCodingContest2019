@@ -2,16 +2,24 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace Solver.Model
 {
 	public class Output4
 	{
-		public Dictionary<int, Point> Capital { get; set; } = new Dictionary<int, Point>();
+		public List<List<Point>> Coords { get; set; } = new List<List<Point>>();
 
 		public override string ToString()
 		{
-			return string.Join(Environment.NewLine, Capital.OrderBy(c => c.Key).Select(q => $"{q.Value.X} {q.Value.Y}"));
+            var sb = new StringBuilder();
+            foreach (var item in Coords)
+            {
+                sb.AppendLine(string.Join(" ", item.Select(q => $"{q.X} {q.Y}")));
+            }
+
+
+            return sb.ToString();
 		}
 	}
 }

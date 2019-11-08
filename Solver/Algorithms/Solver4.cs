@@ -11,6 +11,7 @@ namespace Solver.Algorithms
 		public Output4 Solve(TerrainInput4 input)
 		{
 			var o = new Output4();
+            /*
 			var countries = input.Matrix.GetFlat().Select(c => c.Country).Distinct().ToList();
 			countries.ForEach(c => o.Capital.Add(c, new Point { X = 0, Y = 0 }));
 
@@ -40,7 +41,7 @@ namespace Solver.Algorithms
 
 				o.Capital[country] = location;
 			}
-
+            */
 			return o;
 		}
 	}
