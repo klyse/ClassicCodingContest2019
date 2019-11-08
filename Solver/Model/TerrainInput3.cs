@@ -38,12 +38,12 @@ namespace Solver.Model
             return IsBorder(coordinate.Y, coordinate.X);
         }
 
-        public int Distance(Point coordinate1, Point coordinate2)
+        public double Distance(Point coordinate1, Point coordinate2)
         {
             var yDist = Math.Abs(coordinate1.Y - coordinate2.Y);
             var xDist = Math.Abs(coordinate1.X - coordinate2.X);
 
-            return (int)Math.Sqrt(yDist ^ 2 + xDist ^ 2);
+            return Math.Sqrt(Math.Pow(yDist, 2) + Math.Pow(xDist, 2));
         }
 
         public Matrix<Cell> Matrix;

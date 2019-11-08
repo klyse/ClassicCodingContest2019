@@ -31,11 +31,13 @@ namespace Solver.Algorithms
                 if (input.IsBorder(location))
                 {
                     // Get all inside country cells
-                    location = coords
+                    var temp = coords
                                         .Where(q => !input.IsBorder(q.Y, q.X))
                                         .Select(q => new { Location = q, Distance = input.Distance(location, q) })
                                         .OrderBy(q => q.Distance).ThenBy(q => q.Location.Y).ThenBy(q => q.Location.X)
-                                        .Select(q => q.Location).First();
+                                        .ToList();
+
+                    location = temp.Select(q => q.Location).First();
                 }
 
                 o.Capital[country] = location;
