@@ -19,12 +19,18 @@ namespace Solver.Model
         public int Rows;
         public int Cols;
 
-        public List<Ray> Data;
+        public List<Ray> Rays;
 
 
 
         public TerrainInput4 Parse(string[] values)
         {
+            var val = values[0].Split(' ').Select(q => int.Parse(q)).ToList();
+            Rows = val[0];
+            Cols = val[1];
+
+            Rays = new List<Ray>();
+
             /*
             var val = values.First().Split(' ').Select(q => int.Parse(q)).ToList();
 
@@ -49,7 +55,7 @@ namespace Solver.Model
                 row++;
             }
         */
-			return this;
+            return this;
 		}
 	}
 }
