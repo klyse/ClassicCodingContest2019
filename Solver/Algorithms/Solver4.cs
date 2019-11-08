@@ -12,7 +12,7 @@ namespace Solver.Algorithms
 		{
 			var o = new Output4();
 
-			foreach (var ray in input.Data)
+			foreach (var ray in input.Rays)
 			{
 				var m = (ray.Start.Y - (ray.Start.Y + ray.Direction.Y)) / (ray.Start.X - (ray.Start.X + ray.Direction.X));
 			}
