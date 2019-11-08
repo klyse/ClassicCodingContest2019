@@ -32,7 +32,7 @@ namespace Solver.Algorithms
                 {
                     // Get all inside country cells
                     var temp = coords
-                                        .Where(q => !input.IsBorder(q.Y, q.X))
+                                        .Where(q => !input.IsBorder(q) || input.IsOutside(q, country))
                                         .Select(q => new { Location = q, Distance = input.Distance(location, q) })
                                         .OrderBy(q => q.Distance).ThenBy(q => q.Location.Y).ThenBy(q => q.Location.X)
                                         .ToList();
