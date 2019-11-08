@@ -17,18 +17,19 @@ namespace Solver.Algorithms
                 for (int col = 0; col < input.Matrix.Columns; col++)
                 {
                     var country = input.Matrix[row, col].Country;
+
                     var found = 0;
-                    if (col > 0 && input.Matrix[row, col - 1].Country != country)
+                    if (col > 0 || input.Matrix[row, col - 1].Country != country)
                         found++;
-                    if (row > 0 && input.Matrix[row - 1, col].Country != country)
+                    if (row > 0 || input.Matrix[row - 1, col].Country != country)
                         found++;
-                    if (col < input.Matrix.Columns - 1 && input.Matrix[row, col + 1].Country != country)
+                    if (col < input.Matrix.Columns - 1 || input.Matrix[row, col + 1].Country != country)
                         found++;
-                    if (row < input.Matrix.Rows - 1 && input.Matrix[row +1, col].Country != country)
+                    if (row < input.Matrix.Rows - 1 || input.Matrix[row +1, col].Country != country)
                         found++;
 
                     if (found > 0)
-                        o.NrOfNeighbors[country] = o.NrOfNeighbors[country] + found;
+                        o.NrOfNeighbors[country] = o.NrOfNeighbors[country] + 1;
                 }
 
             return o;
